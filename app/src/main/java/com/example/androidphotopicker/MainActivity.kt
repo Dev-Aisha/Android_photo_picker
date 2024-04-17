@@ -50,10 +50,15 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf<List<Uri>>(emptyList())
                     }
 
-                    val lfsi= rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) {
-                        imageUris.value=it
-                        
+                    val lfsi= rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+                        imageUri.value= it
                     }
+
+                    val lfmi= rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()
+                    ) {
+                        imageUris.value= it
+                    }
+
                     LazyColumn {
                         item {
                             Row(Modifier.padding(top=50.dp)){
@@ -69,7 +74,7 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 Button(onClick = {
-                                    lfsi.launch(
+                                    lfmi.launch(
                                         PickVisualMediaRequest(
                                             ActivityResultContracts.PickVisualMedia.ImageOnly
                                         )
